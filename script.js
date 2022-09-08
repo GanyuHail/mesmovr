@@ -1,8 +1,16 @@
+mouseX = 0,
+mouseY = 0,
+
 init();
 
 function init() {
     let width = window.innerWidth;
     let height = window.innerHeight;
+
+    HEIGHT = window.innerHeight;
+    WIDTH = window.innerWidth;
+    windowHalfX = WIDTH / 2;
+    windowHalfY = HEIGHT / 2;
 
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x4C0056);
@@ -11,8 +19,9 @@ function init() {
     cameraSetBackDist = 7;
     camera.position.z = cameraSetBackDist;
 
-    //const controls = new OrbitControls(camera, renderer.domElement);
-    //controls.update();
+    document.addEventListener('mousemove', onDocumentMouseMove, false);
+    document.addEventListener('touchstart', onDocumentTouchStart, false);
+    document.addEventListener('touchmove', onDocumentTouchMove, false);
 
     const light = new THREE.PointLight(0x4D0076, 2);
     light.position.set(10, 10, 10);
@@ -20,6 +29,10 @@ function init() {
 
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(width, height);
+    camera.position.x += (mouseX - camera.position.x) * 0.05;
+    camera.position.y += (-mouseY - camera.position.y) * 0.05;
+    camera.position.z += (mouseY - camera.position.z) * 0.001;
+    camera.lookAt(scene.position);
     document.body.appendChild(renderer.domElement);
 
     const geometry = new THREE.IcosahedronGeometry(1, 5);
@@ -112,13 +125,34 @@ function init() {
     };
     tick();
 
-    window.addEventListener("resize", () => {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        camera.aspect = width / height;
+    function onWindowResize() {
+        windowHalfX = window.innerWidth / 2;
+        windowHalfY = window.innerHeight / 2;
+        camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
-        renderer.setSize(width, height);
-    });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    function onDocumentMouseMove(e) {
+        mouseX = e.clientX - windowHalfX;
+        mouseY = e.clientY - windowHalfY;
+    }
+
+    function onDocumentTouchStart(e) {
+        if (e.touches.length === 1) {
+            e.preventDefault();
+            mouseX = e.touches[0].pageX - windowHalfX;
+            mouseY = e.touches[0].pageY - windowHalfY;
+        }
+    }
+
+    function onDocumentTouchMove(e) {
+        if (e.touches.length === 1) {
+            e.preventDefault();
+            mouseX = e.touches[0].pageX - windowHalfX;
+            mouseY = e.touches[0].pageY - windowHalfY;
+        }
+    }
 
     function animate() {
         requestAnimationFrame(animate);
