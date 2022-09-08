@@ -99,7 +99,7 @@ function init() {
       const h = Math.abs(Math.sin(angle)) * 360;
 
       const s = 100;
-      const l = 70;
+      const l = 82;
       const color = new THREE.Color(`hsl(${h},${s}%,${l}%)`);
       spheremesh.material.color = color;
 
