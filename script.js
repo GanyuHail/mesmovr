@@ -1,3 +1,5 @@
+init();
+
 function init() {
   let width = window.innerWidth;
   let height = window.innerHeight;
@@ -120,6 +122,5 @@ function init() {
     renderer.render(scene, camera);
   }
 
-  init();
   animate();
 }
