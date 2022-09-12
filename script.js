@@ -16,10 +16,6 @@ function init() {
     cameraSetBackDist = 7;
     camera.position.z = cameraSetBackDist;
 
-    document.addEventListener('mousemove', onDocumentMouseMove, false);
-    document.addEventListener('touchstart', onDocumentTouchStart, false);
-    document.addEventListener('touchmove', onDocumentTouchMove, false);
-
     const light = new THREE.PointLight(0x4D0076, 2);
     light.position.set(10, 10, 10);
     scene.add(light);
