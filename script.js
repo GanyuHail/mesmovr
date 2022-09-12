@@ -25,7 +25,7 @@ function init() {
     camera.lookAt(scene.position);
     document.body.appendChild(renderer.domElement);
 
-    const controls = new THREE.OrbitControls( camera, renderer.domElement );
+    const controls = new OrbitControls( camera, renderer.domElement );
 
     const geometry = new THREE.IcosahedronGeometry(1, 5);
     const geometryPos = geometry.getAttribute("position").array;
