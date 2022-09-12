@@ -115,6 +115,8 @@ function init() {
     };
     tick();
 
+    window.addEventListener('resize', onWindowResize, false);
+
     function onWindowResize() {
         windowHalfX = window.innerWidth / 2;
         windowHalfY = window.innerHeight / 2;
