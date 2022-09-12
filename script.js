@@ -14,15 +14,13 @@ function init() {
 
   const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
   cameraSetBackDist = 7;
-  camera.position.z = cameraSetBackDist;
+  //camera.position.z = cameraSetBackDist;
 
-  const light = new THREE.PointLight(0x4d0076, 2);
-  light.position.set(10, 10, 10);
-  scene.add(light);
-
+  var mouseX = 0;
+  var mouseY = 0;
+  
   const renderer = new THREE.WebGLRenderer();
   renderer.setSize(width, height);
-  camera.lookAt(scene.position);
   document.body.appendChild(renderer.domElement);
 
   const geometry = new THREE.IcosahedronGeometry(1, 5);
@@ -55,10 +53,10 @@ function init() {
     );
 
     normal.normalize();
-    const icoSphereGeometry = new THREE.IcosahedronGeometry(0.1, 1);
+    const icoSphereGeometry = new THREE.IcosahedronGeometry(0.1, 12);
     const material = new THREE.MeshBasicMaterial({
       wireframe: false,
-      color: 0xc100eb
+      color: 0xf5a9b8
     });
 
     const sphere = new THREE.Mesh(icoSphereGeometry, material);
@@ -68,16 +66,20 @@ function init() {
   }
 
   let loopSpeed = 0;
-  let rot = 0;
+  let rot = 0.1;
   const clock = new THREE.Clock();
 
   const tick = () => {
-    rot += 0.05;
+    rot += 12;
     const cameraAngle = (rot * Math.PI) / 360;
     let z = cameraSetBackDist * Math.cos(cameraAngle);
     let x = cameraSetBackDist * Math.sin(cameraAngle);
-    camera.position.set(x, 0, z);
-    camera.lookAt(0, 0, 0);
+    camera.position.set(1, 12, 12);
+    
+  camera.position.x += (mouseX - camera.position.x) * 0.05;
+  camera.position.y += (-mouseY - camera.position.y) * 0.05;
+  camera.position.z += (mouseY - camera.position.z) * 0.001;
+  camera.lookAt(scene.position);
 
     const elapsedTime = clock.getElapsedTime();
 
@@ -116,6 +118,30 @@ function init() {
   tick();
 
   window.addEventListener("resize", onWindowResize, false);
+  document.addEventListener("mousemove", onDocumentMouseMove, false);
+  document.addEventListener("touchstart", onDocumentTouchStart, false);
+  document.addEventListener("touchmove", onDocumentTouchMove, false);
+
+  function onDocumentMouseMove(e) {
+    mouseX = e.clientX - windowHalfX;
+    mouseY = e.clientY - windowHalfY;
+  }
+
+  function onDocumentTouchStart(e) {
+    if (e.touches.length === 1) {
+      e.preventDefault();
+      mouseX = e.touches[0].pageX - windowHalfX;
+      mouseY = e.touches[0].pageY - windowHalfY;
+    }
+  }
+
+  function onDocumentTouchMove(e) {
+    if (e.touches.length === 1) {
+      e.preventDefault();
+      mouseX = e.touches[0].pageX - windowHalfX;
+      mouseY = e.touches[0].pageY - windowHalfY;
+    }
+  }
 
   function onWindowResize() {
     windowHalfX = window.innerWidth / 2;
