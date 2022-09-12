@@ -1,6 +1,3 @@
-mouseX = 0,
-mouseY = 0,
-
 init();
 
 function init() {
@@ -29,9 +26,6 @@ function init() {
 
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(width, height);
-    camera.position.x += (mouseX - camera.position.x) * 0.05;
-    camera.position.y += (-mouseY - camera.position.y) * 0.05;
-    camera.position.z += (mouseY - camera.position.z) * 0.001;
     camera.lookAt(scene.position);
     document.body.appendChild(renderer.domElement);
 
@@ -133,31 +127,9 @@ function init() {
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
-    function onDocumentMouseMove(e) {
-        mouseX = e.clientX - windowHalfX;
-        mouseY = e.clientY - windowHalfY;
-    }
-
-    function onDocumentTouchStart(e) {
-        if (e.touches.length === 1) {
-            e.preventDefault();
-            mouseX = e.touches[0].pageX - windowHalfX;
-            mouseY = e.touches[0].pageY - windowHalfY;
-        }
-    }
-
-    function onDocumentTouchMove(e) {
-        if (e.touches.length === 1) {
-            e.preventDefault();
-            mouseX = e.touches[0].pageX - windowHalfX;
-            mouseY = e.touches[0].pageY - windowHalfY;
-        }
-    }
-
     function animate() {
         requestAnimationFrame(animate);
         renderer.render(scene, camera);
-        controls.update();
     }
 
     animate();
