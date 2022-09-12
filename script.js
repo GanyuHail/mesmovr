@@ -14,7 +14,6 @@ function init() {
 
   const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
   cameraSetBackDist = 7;
-  //camera.position.z = cameraSetBackDist;
 
   var mouseX = 0;
   var mouseY = 0;
@@ -106,8 +105,8 @@ function init() {
 
       const h = Math.abs(Math.sin(angle)) * 180;
 
-      const s = 88;
-      const l = 55;
+      const s = 97;
+      const l = 66;
       const color = new THREE.Color(`hsl(${h},${s}%,${l}%)`);
       spheremesh.material.color = color;
 
