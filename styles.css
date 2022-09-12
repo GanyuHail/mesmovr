@@ -10,51 +10,20 @@ canvas {
 }
 
 body {
-  overflow-x: auto;
-  overflow-y: auto;
+  overflow-x: hidden;
+  overflow-y: hidden;
   padding: 0;
   margin: 0;
 }
 
 #viewport {
-  position: auto;
+  position: fixed;
   margin: 0;
   padding: 0;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
-  overflow-x: auto;
-  overflow-y: auto;
-}
-
-.page-wrapper {
-  padding: 0px;
-  margin: 12px 48px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: calc(100% - 2*48px);
-  word-wrap: break-word;
-  overflow-y: auto;
-}
-
-::-webkit-scrollbar {
-  display: none;
-}
-
-.inner-border::-webkit-scrollbar {
-  display: none;
-}
-
-.element::-webkit-scrollbar {
-  width: 0 !important
-}
-
-.element {
-  overflow: -moz-scrollbars-none;
-}
-
-.element {
-  -ms-overflow-style: none;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
