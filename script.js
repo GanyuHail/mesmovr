@@ -1,3 +1,5 @@
+import { VRButton } from VRButton.js;
+
 init();
 
 function init() {
@@ -22,6 +24,8 @@ function init() {
   renderer.setSize(width, height);
   renderer.xr.enabled = true;
   document.body.appendChild(renderer.domElement);
+
+  document.body.appendChild( VRButton.createButton( renderer ) );
 
   const geometry = new THREE.IcosahedronGeometry(1, 5);
   const geometryPos = geometry.getAttribute("position").array;
@@ -121,8 +125,8 @@ function init() {
   document.addEventListener("mousemove", onDocumentMouseMove, false);
   document.addEventListener("touchstart", onDocumentTouchStart, false);
   document.addEventListener("touchmove", onDocumentTouchMove, false);
-  
-  document.body.appendChild( VRButton.createButton( renderer ) );
+
+  //document.body.appendChild( VRButton.createButton( renderer ) );
 
   function onDocumentMouseMove(e) {
     mouseX = e.clientX - windowHalfX;
