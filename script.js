@@ -20,6 +20,7 @@ function init() {
   
   const renderer = new THREE.WebGLRenderer();
   renderer.setSize(width, height);
+  renderer.xr.enabled = true;
   document.body.appendChild(renderer.domElement);
 
   const geometry = new THREE.IcosahedronGeometry(1, 5);
@@ -112,7 +113,7 @@ function init() {
 
       scene.add(spheremesh);
     });
-    requestAnimationFrame(tick);
+    renderer.setAnimationLoop(tick);
   };
   tick();
 
@@ -120,6 +121,8 @@ function init() {
   document.addEventListener("mousemove", onDocumentMouseMove, false);
   document.addEventListener("touchstart", onDocumentTouchStart, false);
   document.addEventListener("touchmove", onDocumentTouchMove, false);
+  
+  document.body.appendChild( VRButton.createButton( renderer ) );
 
   function onDocumentMouseMove(e) {
     mouseX = e.clientX - windowHalfX;
@@ -151,7 +154,7 @@ function init() {
   }
 
   function animate() {
-    requestAnimationFrame(animate);
+    renderer.setAnimationLoop(animate);
     renderer.render(scene, camera);
   }
   animate();
