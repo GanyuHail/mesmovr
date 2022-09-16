@@ -1,4 +1,4 @@
-import { VRButton } from VRButton.js;
+import { VRButton } from 'https://threejs.org/build/three.js';
 
 init();
 
