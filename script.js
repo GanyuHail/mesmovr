@@ -1,4 +1,4 @@
-import { VRButton } from 'https://threejs.org/build/three.js';
+import { VRButton } from 'three/addons/webxr/VRButton.js';
 
 init();
 
